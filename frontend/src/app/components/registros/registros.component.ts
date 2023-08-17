@@ -2,21 +2,22 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
-import { RegistrosDataSource, RegistrosItem } from './registros-datasource';
+import { RegistrosDataSource } from './registros-datasource';
+import { Registro } from 'src/app/shared/models/registro.model';
 
 @Component({
   selector: 'app-registros',
   templateUrl: './registros.component.html',
-  styleUrls: ['./registros.component.scss']
+  styleUrls: ['./registros.component.scss'],
 })
 export class RegistrosComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) table!: MatTable<RegistrosItem>;
+  @ViewChild(MatTable) table!: MatTable<Registro>;
   dataSource: RegistrosDataSource;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name'];
+  displayedColumns = ['nome', 'status'];
 
   constructor() {
     this.dataSource = new RegistrosDataSource();

@@ -1,4 +1,4 @@
-<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
       <mat-card-title>Registrar</mat-card-title>
@@ -7,87 +7,73 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="First name" formControlName="firstName">
-            <mat-error *ngIf="addressForm.controls['firstName'].hasError('required')">
-              First name is <strong>required</strong>
+            <input matInput placeholder="Nome" formControlName="nome">
+            <mat-error *ngIf="registroForm?.get('nome')?.hasError('required')">
+              O nome é <strong>obrigatório</strong>
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Last name" formControlName="lastName">
-            <mat-error *ngIf="addressForm.controls['lastName'].hasError('required')">
-              Last name is <strong>required</strong>
+            <input matInput placeholder="E-mail" formControlName="email">
+            <mat-error *ngIf="registroForm?.get('email')?.hasError('required')">
+              Email é <strong>obrigatório</strong>
             </mat-error>
           </mat-form-field>
         </div>
       </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="CPF" formControlName="cpf">
-          <mat-error *ngIf="addressForm.controls['cpf'].hasError('required')">
-            CPF <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          <input matInput placeholder="Celular" formControlName="celular">
-          <mat-error *ngIf="addressForm.controls['celular'].hasError('required')">
-            Celular <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
-      <div class="col">
-        <mat-form-field class="full-width">
-          Conhecimentos
-        </mat-form-field>
-      </div>
       <div class="row">
         <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="CPF" formControlName="cpf">
+            <mat-error *ngIf="registroForm?.get('cpf')?.hasError('required')">
+              CPF é <strong>obrigatório</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Celular" formControlName="celular">
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- TODO: bugfix: conhecimentos does not work propely -->
+      <div class="row">
+        <div class="col">
+          <ul>
+            <li *ngFor="let conhecimento of conhecimentos; let i = index">
+              <mat-checkbox>
+                {{ conhecimento }}
+              </mat-checkbox>
+            </li>
+          </ul>
+        </div>
+        <!--
+        <div class="col">
+          <mat-form-field class="full-width">
+            Conhecimentos - Escolha no mínimo 1 e no máximo 3
+          </mat-form-field>
           <div class="card">
-            <div class="card-header">Conhecimentos - Escolha no mínimo 1 e no máximo 3</div>
-            <div class="card-body" name="conhecimentos[]" id="conhecimentos" multiple formControlName="conhecimentos"
-              class="form-control">
-              <div class="col-md-4">
-                <label for="inputState" class="form-label">Conhecimentos</label>
+            <div class="card-body" name="conhecimentos[]" id="conhecimentos" formArrayName="conhecimentos">
+              <div *ngFor="let conhecimento of conhecimentos; let i = index">
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Git</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">React</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">PHP</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">NodeJS</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">DevOps</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Banco de Dados</label>
-                </div>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Typescript</label>
+                  <input class="form-check-input" type="checkbox" [formControlName]="i">
+                  <label class="form-check-label" for="flexSwitchCheckDefault">{{ conhecimento }}</label>
                 </div>
               </div>
             </div>
+            <mat-error *ngIf="registroForm?.get('conhecimentos')?.hasError('minMaxSelected')">
+              Selecione entre 1 e 3 conhecimentos.
+            </mat-error>
           </div>
-
         </div>
+         -->
       </div>
+
     </mat-card-content>
     <mat-card-actions>
       <button mat-raised-button color="primary" type="submit">Submit</button>
+      {{ registroForm.value | json }}
     </mat-card-actions>
   </mat-card>
 </form>

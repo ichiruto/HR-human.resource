@@ -1,5 +1,19 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ValidatorFn,
+  AbstractControl,
+} from '@angular/forms';
+
+interface RegistroFormData {
+  nome: string;
+  email: string;
+  cpf: string;
+  celular: string;
+  conhecimentos: boolean[];
+}
 
 @Component({
   selector: 'app-registrar',
@@ -7,22 +21,46 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./registrar.component.scss'],
 })
 export class RegistrarComponent {
-  addressForm = this.fb.group({
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-    cpf: [null, Validators.required],
-    celular: [null, Validators.required],
-    conhecimentos: [null, Validators.compose([Validators.required])],
-    shipping: ['free', Validators.required],
-  });
+  registroForm: FormGroup;
+  conhecimentos = [
+    'Git',
+    'React',
+    'PHP',
+    'NodeJS',
+    'DevOps',
+    'Banco de Dados',
+    'Typescript',
+  ];
 
-  // alertFormValues(formValue: any) {}
+  constructor(private formBuilder: FormBuilder) {
+    this.registroForm = this.formBuilder.group({
+      nome: ['', Validators.required],
+      email: ['', Validators.required],
+      cpf: ['', Validators.required],
+      celular: [''],
+      conhecimentos: this.formBuilder.array(
+        [],
+        [this.minMaxSelectedCheck(1, 3)]
+      ),
+    });
+  }
 
-  hasUnitNumber = false;
+  onSubmit() {
+    if (this.registroForm.valid) {
+      const formData: RegistroFormData = this.registroForm.value;
+      console.log(formData);
+    }
+  }
 
-  constructor(private fb: FormBuilder) {}
-
-  onSubmit(): void {
-    alert('Thanks!');
+  minMaxSelectedCheck(min: number, max: number): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const selectedCount = control.value.filter(
+        (value: boolean) => value === true
+      ).length;
+      if (selectedCount < min || selectedCount > max) {
+        return { minMaxSelected: true };
+      }
+      return null;
+    };
   }
 }

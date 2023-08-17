@@ -9,6 +9,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 // Angular Material
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -33,7 +34,7 @@ import { RegistrosComponent } from './components/registros/registros.component';
     MenuComponent,
     RegistrosComponent,
     RegistrarComponent,
-    ValidarComponent
+    ValidarComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +43,7 @@ import { RegistrosComponent } from './components/registros/registros.component';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -52,9 +54,9 @@ import { RegistrosComponent } from './components/registros/registros.component';
     MatSelectModule,
     MatRadioModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

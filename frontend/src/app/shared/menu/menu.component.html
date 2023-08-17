@@ -3,8 +3,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Registrar</a>
-      <a mat-list-item href="#">Registros</a>
+      <a mat-list-item routerLink="/registros">Registros</a>
+      <a mat-list-item routerLink="/NOMEDOCOLABORADOR/registrar">Registrar</a>
+      <a mat-list-item routerLink="/NOMEDOCOLABORADOR/validar">Validar</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -18,7 +19,7 @@
 
     <!-- Main Content is HERE -->
     <!-- <app-registros></app-registros> -->
-    <app-registrar></app-registrar>
+    <!-- <app-registrar></app-registrar> -->
 
     <ng-content>
 
