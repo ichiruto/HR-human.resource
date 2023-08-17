@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Colaborador {
+model Registro {
   id            Int      @id @default(autoincrement())
   createdAt     DateTime @default(now())
   nome          String   @db.VarChar(100)
@@ -18,7 +18,7 @@ model Colaborador {
   cpf           Int      @unique
   celular       Int?
   conhecimentos String[]
-  validado      Boolean  @default(false)
+  status        Boolean  @default(false)
 
-  @@map("colaborador")
+  @@map("registro")
 }
