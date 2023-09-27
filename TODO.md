@@ -15,9 +15,10 @@ This is a simple [Nest](https://github.com/nestjs/nest) REST application from sc
 - [Docker](https://www.docker.com/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [NestJS](https://nestjs.com/)
-- [MySql]()
-- [Kafka]()
-- [Angular]()
+- [MySql](https://www.mysql.com/)
+- [Kafka](https://kafka.apache.org/)
+- [Angular](https://angular.io/)
+- [Angular Material](https://material.angular.io/)
 
 ## Requirements
 
@@ -35,16 +36,23 @@ This is a simple [Nest](https://github.com/nestjs/nest) REST application from sc
 ## Usage
 
 1. The backend server will be available at: `http://localhost:3000` for development
+2. The backend swagger will be available at: `http://localhost:3000/api`
 
 ## API Resources
 
 You can use an http client to send requests to this application, such as _Insomnia_, _Postman_
 
-Also, you can access swagger in `http://localhost:3000/api` after run the project
-
 ## Endpoints
 
 1. GET /api/user
+2. POST /api/user
+3. PUT /api/user
+4. DELETE /api/user
+5. GET /api/registries
+6. GET /api/{user_full_name}/registry
+7. POST /api/{user_full_name}/registry
+8. PUT /api/{user_full_name}/registry
+9. DELETE /api/{user_full_name}/registry
 
 ## Testing
 
