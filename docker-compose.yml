@@ -1,12 +1,62 @@
 version: '3.8'
 
 services:
-  xxz-db:
-    image: postgres:13
-    restart: always
-    ports:
-      - 5434:5432
+  # rh-app:
+  #   build:
+  #     context: .
+  #     dockerfile: .
+  #     target: development
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - mysql
+  #   volumes:
+  #     - .:/usr/src/
+  #     - /usr/src/app/node_modules
+
+  mysql:
+    restart: unless-stopped
+    image: mysql:5.7
+    container_name: dev-mysql
     environment:
-      POSTGRES_USER: devadmin
-      POSTGRES_PASSWORD: safe-password
-      POSTGRES_DB: nest
+      MYSQL_DATABASE: 'rh-mysql'
+      # We cannot set user as 'root' if mysql is below version of 5.x: https://github.com/docker-library/mysql/issues/129
+      MYSQL_USER: 'rh-software'
+      MYSQL_PASSWORD: 'POWERpassword123'
+      MYSQL_ROOT_PASSWORD: 'root-password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    volumes:
+      - ./data/db:/var/lib/mysql
+#
+#   zookeeper:
+#     image: 'docker.io/bitnami/zookeeper:3-debian-10'
+#     ports:
+#       - 2181:2181
+#     environment:
+#       - ALLOW_ANONYMOUS_LOGIN=yes
+#     networks:
+#       - app-net
+
+#   kafka:
+#     image: 'docker.io/bitnami/kafka:2-debian-10'
+#     ports:
+#       - 9092:9092
+#       - 9093:9093
+#     environment:
+#       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+#       - ALLOW_PLAINTEXT_LISTENER=yes
+#       - KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE=true
+#       - KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+#       - KAFKA_CFG_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+#       - KAFKA_CFG_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://kafka:9093
+#       - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+#     depends_on:
+#       - zookeeper
+#     networks:
+#       - app-net
+
+# networks:
+#   app-net:
+#     driver: bridge

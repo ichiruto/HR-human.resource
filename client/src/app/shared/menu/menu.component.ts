@@ -6,16 +6,15 @@ import { map, shareReplay } from 'rxjs/operators';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
-      shareReplay()
+      map((result) => result.matches),
+      shareReplay(),
     );
 
   constructor(private breakpointObserver: BreakpointObserver) {}
-
 }

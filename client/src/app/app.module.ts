@@ -24,18 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 // Components
 import { MenuComponent } from './shared/menu/menu.component';
-import { ValidarComponent } from './components/validar/validar.component';
-import { RegistrarComponent } from './components/registrar/registrar.component';
-import { RegistrosComponent } from './components/registros/registros.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MenuComponent,
-    RegistrosComponent,
-    RegistrarComponent,
-    ValidarComponent,
-  ],
+  declarations: [AppComponent, MenuComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
