@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { AuthModule } from './modules/auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { RegistryModule } from './modules/registry/registry.module';
-import { UserModule } from './modules/user/user.module';
+// import { UserModule } from './modules/user/user.module';
 import { DatabaseModule } from './config/database.module';
 import { AdminModule } from './modules/admin/admin.module';
 
@@ -16,7 +16,7 @@ import { AdminModule } from './modules/admin/admin.module';
       envFilePath: ['../.docker.env'],
     }),
     AuthModule,
-    UserModule,
+    // UserModule,
     RegistryModule,
     CoreModule,
     DatabaseModule,
